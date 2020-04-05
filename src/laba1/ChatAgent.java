@@ -35,14 +35,16 @@ import jadex.micro.annotation.RequiredServices;
 @Description("This agent provides a basic chat service.")
 @Agent
 @ProvidedServices(@ProvidedService(type=IChatService.class, 
-	implementation=@Implementation(value=ChatService.class, 
-	interceptors=@Value(clazz=SpamInterceptor.class))))
+	implementation=@Implementation(value=ChatService.class/*, 
+	interceptors=@Value(clazz=SpamInterceptor.class)*/)))
 @RequiredServices({
 	@RequiredService(name="clockservice", type=IClockService.class, 
 		binding=@Binding(scope=Binding.SCOPE_PLATFORM)),
 	@RequiredService(name="chatservices", type=IChatService.class, multiple=true,
 		binding=@Binding(dynamic=true, scope=Binding.SCOPE_GLOBAL)),
 	@RequiredService(name="regservice", type=IRegistryService.class,
+		binding=@Binding(dynamic=true, scope=Binding.SCOPE_GLOBAL)),
+	@RequiredService(name="botservice", type=IBotService.class,
 		binding=@Binding(dynamic=true, scope=Binding.SCOPE_GLOBAL))
 })
 public class ChatAgent

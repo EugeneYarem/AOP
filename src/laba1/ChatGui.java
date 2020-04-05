@@ -12,12 +12,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -36,10 +38,13 @@ import javax.swing.border.LineBorder;
 import jadex.bridge.IComponentStep;
 import jadex.bridge.IExternalAccess;
 import jadex.bridge.IInternalAccess;
+import jadex.bridge.service.RequiredServiceInfo;
 import jadex.bridge.service.component.IRequiredServicesFeature;
+import jadex.bridge.service.search.SServiceProvider;
 import jadex.commons.future.IFuture;
 import jadex.commons.future.IIntermediateFuture;
 import jadex.commons.future.IIntermediateResultListener;
+import jadex.commons.future.IntermediateDefaultResultListener;
 
 /**
  *  Basic chat user interface.
@@ -65,6 +70,8 @@ public class ChatGui extends JFrame
 	protected String currentChat;
 	
 	protected Set<String> activeChats;
+	
+	private String currentCensoredMessage = "";
 	
 	//-------- constructors --------
 	
@@ -127,47 +134,66 @@ public class ChatGui extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				final String text = message.getText(); 
-				ChatGui.this.agent.scheduleStep(new IComponentStep<Void>()
-				{
-					public IFuture<Void> execute(IInternalAccess ia)
-					{
-						IIntermediateFuture<IChatService>	fut	= ia.getComponentFeature(IRequiredServicesFeature.class).getRequiredServices("chatservices");
-						fut.addResultListener(new IIntermediateResultListener<IChatService>()
+				
+				SServiceProvider.getServices(agent, IBotService.class, RequiredServiceInfo.SCOPE_GLOBAL)
+		        .addResultListener(new IntermediateDefaultResultListener<IBotService>()
+		    {
+		        public void intermediateResultAvailable(IBotService s)
+		        {
+		        	try {
+			        	currentCensoredMessage = s.censorMessage(nickname, currentChat, text);       	
+						
+						ChatGui.this.agent.scheduleStep(new IComponentStep<Void>()
 						{
-							public void resultAvailable(Collection<IChatService> result)
+							public IFuture<Void> execute(IInternalAccess ia)
 							{
-								/*for(Iterator<IChatService> it=result.iterator(); it.hasNext(); )
+								IIntermediateFuture<IChatService>	fut	= ia.getComponentFeature(IRequiredServicesFeature.class).getRequiredServices("chatservices");
+								fut.addResultListener(new IIntermediateResultListener<IChatService>()
 								{
-									IChatService cs = it.next();
-									try
+									public void resultAvailable(Collection<IChatService> result)
 									{
-										cs.message(nickname, currentChat, text);
+										/*for(Iterator<IChatService> it=result.iterator(); it.hasNext(); )
+										{
+											IChatService cs = it.next();
+											try
+											{
+												cs.message(nickname, currentChat, text);
+											}
+											catch(Exception e)
+											{
+												System.out.println("Could not send message to: "+cs);
+											}
+										}*/
 									}
-									catch(Exception e)
+									
+									public void intermediateResultAvailable(IChatService cs)
 									{
-										System.out.println("Could not send message to: "+cs);
+										System.out.println("found: "+cs);
+										cs.message(nickname, currentChat, currentCensoredMessage);
 									}
-								}*/
+									
+									public void finished()
+									{
+									}
+									
+									public void exceptionOccurred(Exception exception)
+									{
+									}
+									
+								});
+								return IFuture.DONE;
 							}
-							
-							public void intermediateResultAvailable(IChatService cs)
-							{
-								System.out.println("found: "+cs);
-								cs.message(nickname, currentChat, text);
-							}
-							
-							public void finished()
-							{
-							}
-							
-							public void exceptionOccurred(Exception exception)
-							{
-							}
-							
 						});
-						return IFuture.DONE;
-					}
-				});
+		        	} catch(ForbiddenException e) {
+		        		try {
+							TimeUnit.MINUTES.sleep(1);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+		        	}
+		        }
+		    });
+			
 			}
 		});
 		
