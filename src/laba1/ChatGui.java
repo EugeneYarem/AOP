@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -184,10 +185,18 @@ public class ChatGui extends JFrame
 								return IFuture.DONE;
 							}
 						});
-		        	} catch(ForbiddenException e) {
+		        	} catch(Exception e) {
+		        		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		        		try {
+		        			send.setEnabled(false);
+		        			JOptionPane.showMessageDialog(ChatGui.this,
+		        				    "You are forbidden to send messages for 1 minute.\nPlease, be polite!",
+		        				    "You are forbidden",
+		        				    JOptionPane.WARNING_MESSAGE);
 							TimeUnit.MINUTES.sleep(1);
+							send.setEnabled(true);
 						} catch (InterruptedException e1) {
+							System.out.println("======================================");
 							e1.printStackTrace();
 						}
 		        	}

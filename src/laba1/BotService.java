@@ -29,7 +29,7 @@ import laba1.SpamInterceptor.Pair;
 @Service
 public class BotService implements IBotService
 {
-	private final Integer maxNegativeRate = 2;
+	private final Integer maxNegativeRate = -2;
 	private HashMap<String, Integer> userRates = new HashMap<String, Integer>();
 	
 	public class Pair<U, V> {
@@ -51,7 +51,7 @@ public class BotService implements IBotService
 	}
 	
 	@Override
-	public String censorMessage(final String from, final String to, final String text) throws ForbiddenException {
+	public String censorMessage(final String from, final String to, final String text) throws Exception {
 		System.out.println("@@@@bot hashCode: "+this.hashCode());
 		
 		Pair<String,Integer> censoringResult = this.censorText(text);
@@ -71,8 +71,8 @@ public class BotService implements IBotService
 			userRate = -badWordsNumber;
 		}
 		
-		if(userRate <= this.maxNegativeRate) {
-			throw new ForbiddenException("FORBIDDEN!!!"); 
+		if(userRate <= this.maxNegativeRate && badWordsNumber != 0) {
+			throw new Exception("FORBIDDEN!!!"); 
 		}
 		
 		return censoredMessage;

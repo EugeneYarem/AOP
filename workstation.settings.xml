@@ -98,32 +98,62 @@
 		<p0:property __ID="77" type="autocreate">true</p0:property>
 		<p0:property __ID="78" type="autodelete">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="79" type="StarterServicePanel">
-		<p0:properties __ID="80" type="mpanel">
-			<p0:property __ID="81" type="tree"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+	<p0:properties __ID="79" type="clockservice">
+		<p0:property __ID="80" type="type">system</p0:property>
+		<p0:property __ID="81" type="delta">100</p0:property>
+		<p0:property __ID="82" type="dilation">1.0</p0:property>
+	</p0:properties>
+	<p0:properties __ID="83" type="simulationservice">
+		<p0:property __ID="84" type="executing">true</p0:property>
+	</p0:properties>
+	<p0:properties __ID="85" type="securityservice">
+		<p0:property __ID="86" type="validityduration">327680</p0:property>
+		<p0:property __ID="87" type="usepass">true</p0:property>
+		<p0:property __ID="88" type="password">800549a4-aab</p0:property>
+		<p0:property __ID="89" type="selected_mechanism">0</p0:property>
+		<p0:property __ID="90" type="trustedlan">false</p0:property>
+		<p0:property __ID="91" type="storepath">./keystore</p0:property>
+		<p0:property __ID="92" type="storepass">keystore</p0:property>
+		<p0:property __ID="93" type="keypass">keystore</p0:property>
+		<p0:property __ID="94" type="selmech">0</p0:property>
+		<p0:properties __ID="95" type="DecentralizedAcquisitionMechanism">
+			<p0:property __ID="96" type="responses">1</p0:property>
+		</p0:properties>
+		<p0:properties __ID="97" type="TTPAcquisitionMechanism">
+			<p0:property __ID="98" type="verify">true</p0:property>
+		</p0:properties>
+	</p0:properties>
+	<p0:properties __ID="99" type="awa@workstation_ccf">
+		<p0:property __ID="100" type="fast">false</p0:property>
+		<p0:property __ID="101" type="autocreate">true</p0:property>
+		<p0:property __ID="102" type="autodelete">true</p0:property>
+	</p0:properties>
+	<p0:properties __ID="103" type="StarterServicePanel">
+		<p0:properties __ID="104" type="mpanel">
+			<p0:property __ID="105" type="tree"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <p0:TreeProperties xmlns:p0="typeinfo:jadex.base.gui.filetree" __ID="0">
-	<expandedNodes>
-		<p0:NodePath__1 __ID="1" __len="1">
-			<entries>
-				<p0:NodePath __ID="2" entry="0">
-					<path>
-						<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="3" __len="0"></p1:String__1>
-					</path>
-				</p0:NodePath>
-			</entries>
-		</p0:NodePath__1>
-	</expandedNodes>
 	<selectedNode>
-		<p0:NodePath __ID="4" entry="0">
+		<p0:NodePath __ID="1" entry="0">
 			<path>
-				<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="5" __len="1">
+				<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="2" __len="1">
 					<entries>
-						<p1:String __ID="6">ChatAgent.class</p1:String>
+						<p1:String __ID="3">ChatAgent.class</p1:String>
 					</entries>
 				</p1:String__1>
 			</path>
 		</p0:NodePath>
 	</selectedNode>
+	<expandedNodes>
+		<p0:NodePath__1 __ID="4" __len="1">
+			<entries>
+				<p0:NodePath __ID="5" entry="0">
+					<path>
+						<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="6" __len="0"></p1:String__1>
+					</path>
+				</p0:NodePath>
+			</entries>
+		</p0:NodePath__1>
+	</expandedNodes>
 	<rootPathEntries>
 		<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="7" __len="1">
 			<entries>
@@ -133,49 +163,19 @@
 	</rootPathEntries>
 </p0:TreeProperties>
 ]]></p0:property>
-			<p0:properties __ID="82" type="mic">
-				<p0:property __ID="83" type="Micro Agent">true</p0:property>
+			<p0:properties __ID="106" type="mic">
+				<p0:property __ID="107" type="Micro Agent">true</p0:property>
 			</p0:properties>
 		</p0:properties>
-		<p0:properties __ID="84" type="spanel">
-			<p0:property __ID="85" type="model">bin\laba1\ChatAgent.class</p0:property>
-			<p0:property __ID="86" type="ridurl">file:bin/laba1</p0:property>
-			<p0:property __ID="87" type="globalrid"></p0:property>
-			<p0:property __ID="88" type="startsuspended">false</p0:property>
-			<p0:property __ID="89" type="autogenerate">false</p0:property>
-			<p0:property __ID="90" type="number">1</p0:property>
-			<p0:property __ID="91" type="name">Chat</p0:property>
-			<p0:property __ID="92" type="argument"></p0:property>
+		<p0:properties __ID="108" type="spanel">
+			<p0:property __ID="109" type="model">bin\laba1\ChatAgent.class</p0:property>
+			<p0:property __ID="110" type="ridurl">file:bin/laba1</p0:property>
+			<p0:property __ID="111" type="globalrid"></p0:property>
+			<p0:property __ID="112" type="startsuspended">false</p0:property>
+			<p0:property __ID="113" type="autogenerate">false</p0:property>
+			<p0:property __ID="114" type="number">1</p0:property>
+			<p0:property __ID="115" type="name">Chat</p0:property>
+			<p0:property __ID="116" type="argument"></p0:property>
 		</p0:properties>
-	</p0:properties>
-	<p0:properties __ID="93" type="clockservice">
-		<p0:property __ID="94" type="type">system</p0:property>
-		<p0:property __ID="95" type="delta">100</p0:property>
-		<p0:property __ID="96" type="dilation">1.0</p0:property>
-	</p0:properties>
-	<p0:properties __ID="97" type="simulationservice">
-		<p0:property __ID="98" type="executing">true</p0:property>
-	</p0:properties>
-	<p0:properties __ID="99" type="securityservice">
-		<p0:property __ID="100" type="validityduration">327680</p0:property>
-		<p0:property __ID="101" type="usepass">true</p0:property>
-		<p0:property __ID="102" type="password">800549a4-aab</p0:property>
-		<p0:property __ID="103" type="selected_mechanism">0</p0:property>
-		<p0:property __ID="104" type="trustedlan">false</p0:property>
-		<p0:property __ID="105" type="storepath">./keystore</p0:property>
-		<p0:property __ID="106" type="storepass">keystore</p0:property>
-		<p0:property __ID="107" type="keypass">keystore</p0:property>
-		<p0:property __ID="108" type="selmech">0</p0:property>
-		<p0:properties __ID="109" type="DecentralizedAcquisitionMechanism">
-			<p0:property __ID="110" type="responses">1</p0:property>
-		</p0:properties>
-		<p0:properties __ID="111" type="TTPAcquisitionMechanism">
-			<p0:property __ID="112" type="verify">true</p0:property>
-		</p0:properties>
-	</p0:properties>
-	<p0:properties __ID="113" type="awa@workstation_ccf">
-		<p0:property __ID="114" type="fast">false</p0:property>
-		<p0:property __ID="115" type="autocreate">true</p0:property>
-		<p0:property __ID="116" type="autodelete">true</p0:property>
 	</p0:properties>
 </p0:properties>

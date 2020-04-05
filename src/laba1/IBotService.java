@@ -10,5 +10,5 @@ public interface IBotService
 	 *  @param sender The sender's name.
 	 *  @param text The message text.
 	 */
-	public String censorMessage(final String from, final String to, final String text) throws ForbiddenException;
+	public String censorMessage(final String from, final String to, final String text) throws Exception;
 }
