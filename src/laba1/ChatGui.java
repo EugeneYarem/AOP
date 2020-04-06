@@ -3,6 +3,7 @@ package laba1;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,6 +92,10 @@ public class ChatGui extends JFrame
 		chat = new JLabel("#general");
 		chat.setFont(new Font("Arial", Font.BOLD, 20 ));
 		
+		JLabel madeFriends = new JLabel("You made friends with the bot!");
+		madeFriends.setFont(new Font("Arial", Font.BOLD, 15 ));
+		madeFriends.setForeground(Color.decode("#449c5c"));
+		
 		received = new JTextArea(10, 20);
 		received.setEditable(false);
 		received.setDisabledTextColor(Color.BLACK);
@@ -117,18 +122,61 @@ public class ChatGui extends JFrame
 		
 		final JTextField message = new JTextField();
 		JButton send = new JButton("send");
+		JButton makeFriends = new JButton("Make friends with the bot");
 		
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(chattersList, BorderLayout.WEST);
-		panel.add(chat, BorderLayout.NORTH);
-		panel.add(received, BorderLayout.CENTER);
+		JPanel topPanel = new JPanel(new BorderLayout());
+		topPanel.add(chat, BorderLayout.WEST);
+		topPanel.add(makeFriends, BorderLayout.EAST);
 		
-		JPanel panel2 = new JPanel(new BorderLayout());
-		panel2.add(message, BorderLayout.CENTER);
-		panel2.add(send, BorderLayout.EAST);
+		JPanel centerPanel = new JPanel(new BorderLayout());
+		centerPanel.add(chattersList, BorderLayout.WEST);
+		centerPanel.add(topPanel, BorderLayout.NORTH);
+		centerPanel.add(received, BorderLayout.CENTER);
 		
-		getContentPane().add(panel, BorderLayout.CENTER);
-		getContentPane().add(panel2, BorderLayout.SOUTH);
+		JPanel bottomPanel = new JPanel(new BorderLayout());
+		bottomPanel.add(message, BorderLayout.CENTER);
+		bottomPanel.add(send, BorderLayout.EAST);
+		
+		getContentPane().add(centerPanel, BorderLayout.CENTER);
+		getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+		
+		this.setMinimumSize(new Dimension(500, 400));
+		
+		makeFriends.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				final String text = message.getText(); 
+				
+				SServiceProvider.getServices(agent, IBotService.class, RequiredServiceInfo.SCOPE_GLOBAL)
+		        .addResultListener(new IntermediateDefaultResultListener<IBotService>()
+		    {
+		        public void intermediateResultAvailable(IBotService s)
+		        {
+		        	String password = JOptionPane.showInputDialog(null,
+		        			 "Enter a password to make friends with the bot",
+		        			 "What is a password?",
+		        			 JOptionPane.QUESTION_MESSAGE);
+		        	
+		        	if(s.addFriend(nickname, password)) {
+		        		JOptionPane.showMessageDialog(ChatGui.this,
+	        				    "You are allowed to send messages to the bot.",
+	        				    "You made friends!",
+	        				    JOptionPane.INFORMATION_MESSAGE);
+		        		topPanel.remove(makeFriends);
+		        		topPanel.add(madeFriends, BorderLayout.EAST);
+		        		topPanel.updateUI();
+		        	} else {
+		        		JOptionPane.showMessageDialog(ChatGui.this,
+	        				    "The password was wrong.",
+	        				    "Sorry...",
+	        				    JOptionPane.INFORMATION_MESSAGE);
+		        	}
+		        }
+		    });
+			
+			}
+		});
 		
 		send.addActionListener(new ActionListener()
 		{

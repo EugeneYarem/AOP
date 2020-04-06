@@ -11,4 +11,6 @@ public interface IBotService
 	 *  @param text The message text.
 	 */
 	public String censorMessage(final String from, final String to, final String text) throws Exception;
+	
+	public boolean addFriend(final String nickname, final String password);
 }

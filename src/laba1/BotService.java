@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -29,8 +30,13 @@ import laba1.SpamInterceptor.Pair;
 @Service
 public class BotService implements IBotService
 {
+	/** The agent. */
+	@ServiceComponent
+	protected IInternalAccess agent;
+	
 	private final Integer maxNegativeRate = -2;
 	private HashMap<String, Integer> userRates = new HashMap<String, Integer>();
+	private HashSet<String> friends = new HashSet<String>();
 	
 	public class Pair<U, V> {
 		private U first;
@@ -117,5 +123,13 @@ public class BotService implements IBotService
         }
         
         return new Pair<String, Integer>(stringBuilder.toString(), badWordsCounter);
+	}
+	
+	@Override
+	public boolean addFriend(final String nickname, final String password) {
+		if(agent.getArgument("password") != null && agent.getArgument("password").equals(password)) {
+			friends.add(nickname);
+			return true;
+		} else return false;
 	}
 }
