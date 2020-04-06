@@ -16,19 +16,16 @@ import jadex.micro.annotation.ProvidedServices;
 import jadex.micro.annotation.RequiredService;
 import jadex.micro.annotation.RequiredServices;
 
-/**
- *  Chat micro agent with a registry service. 
- */
+/*@Agent
 @Description("This agent presents the chat bot.")
-@Agent
 @ProvidedServices(@ProvidedService(type=IBotService.class, 
-	implementation=@Implementation(BotService.class)))
-public class BotAgent
+	implementation=@Implementation(BotService.class)))*/
+public class BotBDI_Old
 {
 	/** The agent. */
-	@Agent
+	/*@Agent
 	protected IInternalAccess agent;
 	
 	@AgentArgument("password")
-	protected String password;
+	protected String password;*/
 }

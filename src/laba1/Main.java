@@ -8,11 +8,12 @@ public class Main {
         PlatformConfiguration   config  = PlatformConfiguration.getDefault();
 
         config.setDefaultTimeout(0);
-        config.addComponent("laba1.BotAgent.class");
+        config.addComponent("laba1.TranslationBDI.class");
+        /*config.addComponent("laba1.BotBDI.class");
         config.addComponent("laba1.RegistryAgent.class");
         config.addComponent("laba1.ChatAgent.class");
         config.addComponent("laba1.ChatAgent.class");
-        config.addComponent("laba1.ChatAgent.class");
+        config.addComponent("laba1.ChatAgent.class");*/
         Starter.createPlatform(config).get();
     }
 }
