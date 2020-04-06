@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,7 +74,7 @@ public class ChatGui extends JFrame
 	
 	protected Set<String> activeChats;
 	
-	private String currentCensoredMessage = "";
+	private ArrayList<Message> currentCensoredMessage; // contains censored message and possible bot answer on it
 	
 	//-------- constructors --------
 	
@@ -190,7 +191,7 @@ public class ChatGui extends JFrame
 		        public void intermediateResultAvailable(IBotService s)
 		        {
 		        	try {
-			        	currentCensoredMessage = s.censorMessage(nickname, currentChat, text);       	
+			        	currentCensoredMessage = s.validateMessage(nickname, currentChat, text);       	
 						
 						ChatGui.this.agent.scheduleStep(new IComponentStep<Void>()
 						{
@@ -218,7 +219,9 @@ public class ChatGui extends JFrame
 									public void intermediateResultAvailable(IChatService cs)
 									{
 										System.out.println("found: "+cs);
-										cs.message(nickname, currentChat, currentCensoredMessage);
+										for(Message i : currentCensoredMessage) {
+											cs.message(i.getFrom(), i.getTo(), i.getText(), i.isMessageFromBot());
+										}
 									}
 									
 									public void finished()
@@ -235,6 +238,7 @@ public class ChatGui extends JFrame
 						});
 		        	} catch(Exception e) {
 		        		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		        		System.out.println(e.getMessage());
 		        		try {
 		        			send.setEnabled(false);
 		        			JOptionPane.showMessageDialog(ChatGui.this,

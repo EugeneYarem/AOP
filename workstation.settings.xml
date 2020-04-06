@@ -135,87 +135,102 @@
 		<p0:property __ID="107" type="autocreate">true</p0:property>
 		<p0:property __ID="108" type="autodelete">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="109" type="StarterServicePanel">
-		<p0:properties __ID="110" type="mpanel">
-			<p0:property __ID="111" type="tree"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+	<p0:properties __ID="109" type="chat">
+		<p0:property __ID="110" type="nickname">user_2d9</p0:property>
+	</p0:properties>
+	<p0:properties __ID="111" type="awa@workstation_e40">
+		<p0:property __ID="112" type="fast">false</p0:property>
+		<p0:property __ID="113" type="autocreate">true</p0:property>
+		<p0:property __ID="114" type="autodelete">true</p0:property>
+	</p0:properties>
+	<p0:properties __ID="115" type="StarterServicePanel">
+		<p0:properties __ID="116" type="mpanel">
+			<p0:property __ID="117" type="tree"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <p0:TreeProperties xmlns:p0="typeinfo:jadex.base.gui.filetree" __ID="0">
 	<selectedNode>
 		<p0:NodePath __ID="1" entry="0">
 			<path>
-				<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="2" __len="1">
+				<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="2" __len="2">
 					<entries>
-						<p1:String __ID="3">ChatAgent.class</p1:String>
+						<p1:String __ID="3">laba1</p1:String>
+						<p1:String __ID="4">BotAgent.class</p1:String>
 					</entries>
 				</p1:String__1>
 			</path>
 		</p0:NodePath>
 	</selectedNode>
 	<expandedNodes>
-		<p0:NodePath__1 __ID="4" __len="1">
+		<p0:NodePath__1 __ID="5" __len="2">
 			<entries>
-				<p0:NodePath __ID="5" entry="0">
+				<p0:NodePath __ID="6" entry="0">
 					<path>
-						<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="6" __len="0"></p1:String__1>
+						<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="7" __len="0"></p1:String__1>
+					</path>
+				</p0:NodePath>
+				<p0:NodePath __ID="8" entry="0">
+					<path>
+						<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="9" __len="1">
+							<entries>
+								<p1:String __ID="10">laba1</p1:String>
+							</entries>
+						</p1:String__1>
 					</path>
 				</p0:NodePath>
 			</entries>
 		</p0:NodePath__1>
 	</expandedNodes>
 	<rootPathEntries>
-		<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="7" __len="1">
+		<p1:String__1 xmlns:p1="typeinfo:java.lang" __ID="11" __len="1">
 			<entries>
-				<p1:String __ID="8">bin\laba1</p1:String>
+				<p1:String __ID="12">bin</p1:String>
 			</entries>
 		</p1:String__1>
 	</rootPathEntries>
 </p0:TreeProperties>
 ]]></p0:property>
-			<p0:properties __ID="112" type="mic">
-				<p0:property __ID="113" type="Micro Agent">true</p0:property>
+			<p0:properties __ID="118" type="mic">
+				<p0:property __ID="119" type="Micro Agent">true</p0:property>
 			</p0:properties>
 		</p0:properties>
-		<p0:properties __ID="114" type="spanel">
-			<p0:property __ID="115" type="model">bin\laba1\ChatAgent.class</p0:property>
-			<p0:property __ID="116" type="ridurl">file:bin/laba1</p0:property>
-			<p0:property __ID="117" type="globalrid"></p0:property>
-			<p0:property __ID="118" type="startsuspended">false</p0:property>
-			<p0:property __ID="119" type="autogenerate">false</p0:property>
-			<p0:property __ID="120" type="number">1</p0:property>
-			<p0:property __ID="121" type="name">Chat</p0:property>
-			<p0:property __ID="122" type="argument"></p0:property>
+		<p0:properties __ID="120" type="spanel">
+			<p0:property __ID="121" type="model">bin\laba1\BotAgent.class</p0:property>
+			<p0:property __ID="122" type="ridurl">file:bin</p0:property>
+			<p0:property __ID="123" type="globalrid"></p0:property>
+			<p0:property __ID="124" type="startsuspended">false</p0:property>
+			<p0:property __ID="125" type="autogenerate">false</p0:property>
+			<p0:property __ID="126" type="number">1</p0:property>
+			<p0:property __ID="127" type="name">Bot</p0:property>
+			<p0:property __ID="128" type="argument">"pass"</p0:property>
 		</p0:properties>
 	</p0:properties>
-	<p0:properties __ID="123" type="clockservice">
-		<p0:property __ID="124" type="type">system</p0:property>
-		<p0:property __ID="125" type="delta">100</p0:property>
-		<p0:property __ID="126" type="dilation">1.0</p0:property>
+	<p0:properties __ID="129" type="clockservice">
+		<p0:property __ID="130" type="type">system</p0:property>
+		<p0:property __ID="131" type="delta">100</p0:property>
+		<p0:property __ID="132" type="dilation">1.0</p0:property>
 	</p0:properties>
-	<p0:properties __ID="127" type="simulationservice">
-		<p0:property __ID="128" type="executing">true</p0:property>
+	<p0:properties __ID="133" type="simulationservice">
+		<p0:property __ID="134" type="executing">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="129" type="chat">
-		<p0:property __ID="130" type="nickname">user_2d9</p0:property>
-	</p0:properties>
-	<p0:properties __ID="131" type="securityservice">
-		<p0:property __ID="132" type="validityduration">327680</p0:property>
-		<p0:property __ID="133" type="usepass">true</p0:property>
-		<p0:property __ID="134" type="password">800549a4-aab</p0:property>
-		<p0:property __ID="135" type="selected_mechanism">0</p0:property>
-		<p0:property __ID="136" type="trustedlan">false</p0:property>
-		<p0:property __ID="137" type="storepath">./keystore</p0:property>
-		<p0:property __ID="138" type="storepass">keystore</p0:property>
-		<p0:property __ID="139" type="keypass">keystore</p0:property>
-		<p0:property __ID="140" type="selmech">0</p0:property>
-		<p0:properties __ID="141" type="DecentralizedAcquisitionMechanism">
-			<p0:property __ID="142" type="responses">1</p0:property>
+	<p0:properties __ID="135" type="securityservice">
+		<p0:property __ID="136" type="validityduration">327680</p0:property>
+		<p0:property __ID="137" type="usepass">true</p0:property>
+		<p0:property __ID="138" type="password">800549a4-aab</p0:property>
+		<p0:property __ID="139" type="selected_mechanism">0</p0:property>
+		<p0:property __ID="140" type="trustedlan">false</p0:property>
+		<p0:property __ID="141" type="storepath">./keystore</p0:property>
+		<p0:property __ID="142" type="storepass">keystore</p0:property>
+		<p0:property __ID="143" type="keypass">keystore</p0:property>
+		<p0:property __ID="144" type="selmech">0</p0:property>
+		<p0:properties __ID="145" type="DecentralizedAcquisitionMechanism">
+			<p0:property __ID="146" type="responses">1</p0:property>
 		</p0:properties>
-		<p0:properties __ID="143" type="TTPAcquisitionMechanism">
-			<p0:property __ID="144" type="verify">true</p0:property>
+		<p0:properties __ID="147" type="TTPAcquisitionMechanism">
+			<p0:property __ID="148" type="verify">true</p0:property>
 		</p0:properties>
 	</p0:properties>
-	<p0:properties __ID="145" type="awa@workstation_e40">
-		<p0:property __ID="146" type="fast">false</p0:property>
-		<p0:property __ID="147" type="autocreate">true</p0:property>
-		<p0:property __ID="148" type="autodelete">true</p0:property>
+	<p0:properties __ID="149" type="awa@workstation_ae4">
+		<p0:property __ID="150" type="fast">false</p0:property>
+		<p0:property __ID="151" type="autocreate">true</p0:property>
+		<p0:property __ID="152" type="autodelete">true</p0:property>
 	</p0:properties>
 </p0:properties>

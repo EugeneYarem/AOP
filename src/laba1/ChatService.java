@@ -87,9 +87,9 @@ public class ChatService implements IChatService
 	 *  @param sender The sender's name.
 	 *  @param text The message text.
 	 */
-	public void message(final String from, final String to, final String text)
+	public void message(final String from, final String to, final String text, boolean isMessageFromBot)
 	{
-		gui.addMessage(from, to, format.format(new Date(clock.getTime()))+" : "+from+" : "+text);
+		gui.addMessage(from, to, format.format(new Date(clock.getTime()))+" : "+ (isMessageFromBot ? "@Bot" : from) +" : "+text);
 	}
 	
 	/**

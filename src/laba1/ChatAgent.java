@@ -72,6 +72,9 @@ public class ChatAgent
 			public void resultAvailable(final IRegistryService rs)
 			{
 				nickname = agent.getComponentIdentifier().getName();
+				if(nickname.equals("Bot")) {
+					nickname += "_copy";
+				}
 				subscription = rs.register(agent.getComponentIdentifier(), nickname);
 				
 				subscription.addIntermediateResultListener(new IntermediateDefaultResultListener<String>() {

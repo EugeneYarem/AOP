@@ -10,7 +10,7 @@ public interface IChatService
 	 *  @param sender The sender's name.
 	 *  @param text The message text.
 	 */
-	public void message(final String from, final String to, final String text);
+	public void message(final String from, final String to, final String text, boolean isMessageFromBot);
 	
 	public void addChatter(String nickname);
 }

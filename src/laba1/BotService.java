@@ -1,5 +1,6 @@
 package laba1;
 
+import java.awt.BorderLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,9 +35,14 @@ public class BotService implements IBotService
 	@ServiceComponent
 	protected IInternalAccess agent;
 	
+	protected String nickname;
+	
+	protected String appeal;
+	
 	private final Integer maxNegativeRate = -2;
 	private HashMap<String, Integer> userRates = new HashMap<String, Integer>();
 	private HashSet<String> friends = new HashSet<String>();
+	private HashSet<String> beliefs = new HashSet<String>();
 	
 	public class Pair<U, V> {
 		private U first;
@@ -57,7 +63,7 @@ public class BotService implements IBotService
 	}
 	
 	@Override
-	public String censorMessage(final String from, final String to, final String text) throws Exception {
+	public ArrayList<Message> validateMessage(final String from, final String to, final String text) throws Exception {
 		System.out.println("@@@@bot hashCode: "+this.hashCode());
 		
 		Pair<String,Integer> censoringResult = this.censorText(text);
@@ -81,7 +87,25 @@ public class BotService implements IBotService
 			throw new Exception("FORBIDDEN!!!"); 
 		}
 		
-		return censoredMessage;
+		nickname = "@Bot"; // + agent.getComponentIdentifier().getLocalName();
+		System.out.println("@@@@nickname: "+nickname);
+		appeal = nickname + ",";
+		
+		ArrayList<Message> messages = new ArrayList<Message>();
+		messages.add(new Message(from, to, censoredMessage, false));
+		
+		// this.agent.getComponentIdentifier().getName();
+		Integer spacePos = text.indexOf(" ");
+		if(spacePos > 0 && text.substring(0, spacePos).equals(appeal)) {
+			if(badWordsNumber == 0) {
+				messages.add(new Message(from, to, this.answerOnFact(from, to, censoredMessage), true));
+			} else {
+				//"	" + from + ", Вы не входите в список моих друзей!"
+				messages.add(new Message(from, to, "    " + from + ", даже не собираюсь отвечать на Ваши оскорбления!", true));
+			}
+		}
+				
+		return messages;
 		
 		// context.getArgumentArray()[2] = censoredMessage;
 		
@@ -131,5 +155,29 @@ public class BotService implements IBotService
 			friends.add(nickname);
 			return true;
 		} else return false;
+	}
+	
+	@Override
+	public String answerOnFact(final String from, final String to, final String text) {
+		if(friends.contains(from)) {
+			String fact = text.substring(text.indexOf(" ") + 1);
+			System.out.println("fact: "+fact);
+			
+			if(fact.equals("-?")) {
+				return "-f - вывести список фактов";
+			}
+			else if(fact.equals("-f")) {
+				String answer = "";
+				
+				for(String i : beliefs) {
+					answer += i + "\n";
+				}
+				
+				return answer;
+			} else {
+				beliefs.add(fact);
+				return "    Окей, " + from + ", я принял!";
+			}
+		} else return "    " + from + ", Вы не входите в список моих друзей!";
 	}
 }
