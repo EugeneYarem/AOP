@@ -170,7 +170,7 @@ public class BotService implements IBotService
 				String answer = "";
 				
 				for(String i : beliefs) {
-					answer += i + "\n";
+					answer += "<p>" + i + "</p>";
 				}
 				
 				return answer;

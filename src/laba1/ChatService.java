@@ -89,7 +89,7 @@ public class ChatService implements IChatService
 	 */
 	public void message(final String from, final String to, final String text, boolean isMessageFromBot)
 	{
-		gui.addMessage(from, to, format.format(new Date(clock.getTime()))+" : "+ (isMessageFromBot ? "@Bot" : from) +" : "+text);
+		gui.addMessage(from, to, "<p><u>" + format.format(new Date(clock.getTime()))+"</u> : <b>"+ (isMessageFromBot ? "@Bot" : from) +"</b> : "+text+ "</p>");
 	}
 	
 	/**

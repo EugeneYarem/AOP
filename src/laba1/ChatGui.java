@@ -31,8 +31,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
@@ -59,7 +61,7 @@ public class ChatGui extends JFrame
 	/** The textfield with received messages. */
 	protected JLabel chat;
 	
-	protected JTextArea received;
+	protected JTextPane received;
 	
 	protected JList<String> chattersList;
 	
@@ -97,9 +99,12 @@ public class ChatGui extends JFrame
 		madeFriends.setFont(new Font("Arial", Font.BOLD, 15 ));
 		madeFriends.setForeground(Color.decode("#449c5c"));
 		
-		received = new JTextArea(10, 20);
+		received = new JTextPane();
 		received.setEditable(false);
 		received.setDisabledTextColor(Color.BLACK);
+		received.setContentType("text/html");
+		JScrollPane scroller = new JScrollPane();
+	    scroller.setViewportView(received);
 		
 		messages = new HashMap<String, String>();
 		currentChat = "#general";
@@ -132,7 +137,7 @@ public class ChatGui extends JFrame
 		JPanel centerPanel = new JPanel(new BorderLayout());
 		centerPanel.add(chattersList, BorderLayout.WEST);
 		centerPanel.add(topPanel, BorderLayout.NORTH);
-		centerPanel.add(received, BorderLayout.CENTER);
+		centerPanel.add(scroller, BorderLayout.CENTER);
 		
 		JPanel bottomPanel = new JPanel(new BorderLayout());
 		bottomPanel.add(message, BorderLayout.CENTER);
@@ -284,8 +289,8 @@ public class ChatGui extends JFrame
 				if(to.equals("#general")) {
 					String curText = messages.get("#general");
 					if(curText != null)
-						messages.put("#general", curText + text + "\n");
-					else messages.put("#general", text + "\n");
+						messages.put("#general", curText + text);
+					else messages.put("#general", text);
 					
 					received.setText(messages.get(currentChat));
 					
@@ -298,16 +303,16 @@ public class ChatGui extends JFrame
 				} else if(from.equals(nickname) || (from.equals(currentChat) && to.equals(nickname))) {
 					String curText = messages.get(currentChat);
 					if(curText != null)
-						messages.put(currentChat, curText + text + "\n");
-					else messages.put(currentChat, text + "\n");
+						messages.put(currentChat, curText + text);
+					else messages.put(currentChat, text);
 					
 					received.setText(messages.get(currentChat));
 				}
 				else if(to.equals(nickname)) {
 					String curText = messages.get(from);
 					if(curText != null)
-						messages.put(from, curText + text + "\n");
-					else messages.put(from, text + "\n");
+						messages.put(from, curText + text);
+					else messages.put(from, text);
 					
 					if(from.equals(currentChat)) {
 						received.setText(messages.get(currentChat));
