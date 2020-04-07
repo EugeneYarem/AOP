@@ -43,6 +43,7 @@ public class BotService implements IBotService
 	private HashMap<String, Integer> userRates = new HashMap<String, Integer>();
 	private HashSet<String> friends = new HashSet<String>();
 	private HashSet<String> beliefs = new HashSet<String>();
+	private HashSet<String> violators = new HashSet<String>();
 	
 	public class Pair<U, V> {
 		private U first;
@@ -65,6 +66,12 @@ public class BotService implements IBotService
 	@Override
 	public ArrayList<Message> validateMessage(final String from, final String to, final String text) throws Exception {
 		System.out.println("@@@@bot hashCode: "+this.hashCode());
+		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		if(violators.contains(from) && violators.contains(to)) {
+			messages.add(new Message(from, to, "<span style=\"color:red;\">Вам запрещено общаться, т.к. Вы относитесь к недисциплинированным пользователям!</span>", true));
+			return messages;
+		}
 		
 		Pair<String,Integer> censoringResult = this.censorText(text);
 		String censoredMessage = censoringResult.getFirst();
@@ -84,6 +91,7 @@ public class BotService implements IBotService
 		}
 		
 		if(userRate <= this.maxNegativeRate && badWordsNumber != 0) {
+			violators.add(from);
 			throw new Exception("FORBIDDEN!!!"); 
 		}
 		
@@ -91,7 +99,6 @@ public class BotService implements IBotService
 		System.out.println("@@@@nickname: "+nickname);
 		appeal = nickname + ",";
 		
-		ArrayList<Message> messages = new ArrayList<Message>();
 		messages.add(new Message(from, to, censoredMessage, false));
 		
 		// this.agent.getComponentIdentifier().getName();
