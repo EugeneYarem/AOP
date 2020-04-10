@@ -243,19 +243,32 @@ public class ChatGui extends JFrame
 						});
 		        	} catch(Exception e) {
 		        		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		        		System.out.println(e.getMessage());
-		        		try {
-		        			send.setEnabled(false);
+		        		String errorMes = e.getMessage();
+		        		errorMes = errorMes.substring(errorMes.indexOf(':') + 2);
+		        		System.out.println(errorMes);
+		        		if(errorMes.equals("FORBIDDEN!!!")) {
+			        		try {
+			        			send.setEnabled(false);
+			        			JOptionPane.showMessageDialog(ChatGui.this,
+			        				    "You are forbidden to send messages for 1 minute.\nPlease, be polite!",
+			        				    "You are forbidden",
+			        				    JOptionPane.WARNING_MESSAGE);
+								TimeUnit.MINUTES.sleep(1);
+								send.setEnabled(true);
+							} catch (InterruptedException e1) {
+								System.out.println("======================================");
+								e1.printStackTrace();
+							}
+			        		return;
+		        		}
+		        		
+		        		if(errorMes.equals("NOT LATIN!!!")) {
+		        			System.out.println("*******************");
 		        			JOptionPane.showMessageDialog(ChatGui.this,
-		        				    "You are forbidden to send messages for 1 minute.\nPlease, be polite!",
-		        				    "You are forbidden",
-		        				    JOptionPane.WARNING_MESSAGE);
-							TimeUnit.MINUTES.sleep(1);
-							send.setEnabled(true);
-						} catch (InterruptedException e1) {
-							System.out.println("======================================");
-							e1.printStackTrace();
-						}
+		        					"You can use only latin alphabet.",
+		        					"Warning",
+		        					JOptionPane.WARNING_MESSAGE);
+		        		}
 		        	}
 		        }
 		    });

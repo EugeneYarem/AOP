@@ -25,6 +25,9 @@ import jadex.commons.future.IFuture;
 import jadex.commons.gui.future.SwingExceptionDelegationResultListener;
 import laba1.SpamInterceptor.Pair;
 
+import org.python.util.PythonInterpreter;
+import org.python.core.*;
+
 /**
  *  The chat service.
  */
@@ -64,18 +67,37 @@ public class BotService implements IBotService
 	}
 	
 	@Override
-	public ArrayList<Message> validateMessage(final String from, final String to, final String text) throws Exception {
+	public ArrayList<Message> validateMessage(final String from, final String to, final String text) throws Exception, PyException {
 		System.out.println("@@@@bot hashCode: "+this.hashCode());
 		ArrayList<Message> messages = new ArrayList<Message>();
 		
+		for(int i = 0; i < text.length(); i++) {
+			System.out.println("char: "+text.charAt(i)+" int: " + (int)text.charAt(i));
+			if(text.charAt(i) >= 1040 && text.charAt(i) <= 1103) {
+				throw new Exception("NOT LATIN!!!"); 
+			}
+		}
+		
 		if(violators.contains(from) && violators.contains(to)) {
-			messages.add(new Message(from, to, "<span style=\"color:red;\">Вам запрещено общаться, т.к. Вы относитесь к недисциплинированным пользователям!</span>", true));
+			messages.add(new Message(from, to, "<span style=\"color:red;\">You are not allowed to communicate because you are an undisciplined users!</span>", true));
 			return messages;
 		}
 		
-		Pair<String,Integer> censoringResult = this.censorText(text);
+		/*Pair<String,Integer> censoringResult = this.censorText(text);
 		String censoredMessage = censoringResult.getFirst();
-		Integer badWordsNumber = censoringResult.getSecond();		
+		Integer badWordsNumber = censoringResult.getSecond();	*/	
+		
+		PythonInterpreter pi = new PythonInterpreter();
+    	pi.exec("from profanityfilter import ProfanityFilter");
+    	pi.exec("pf = ProfanityFilter()");
+        pi.set("string", new PyString(text));
+        pi.exec("result = pf.censor(string)");
+        pi.exec("badWordsNum = pf.is_profane(string)");
+        pi.exec("print(result)");
+        pi.exec("print(badWordsNum)");
+        String censoredMessage = ((PyString)pi.get("result")).asString();
+        Integer badWordsNumber = ((PyInteger)pi.get("badWordsNum")).asInt();
+                		
 		System.out.println("badWordsNumber: "+badWordsNumber);
 		System.out.println("censoredMessage: "+censoredMessage);
 		
@@ -108,7 +130,7 @@ public class BotService implements IBotService
 				messages.add(new Message(from, to, this.answerOnFact(from, to, censoredMessage), true));
 			} else {
 				//"	" + from + ", Вы не входите в список моих друзей!"
-				messages.add(new Message(from, to, "    " + from + ", даже не собираюсь отвечать на Ваши оскорбления!", true));
+				messages.add(new Message(from, to, "    " + from + ", not even going to answer your insults!", true));
 			}
 		}
 				
@@ -171,7 +193,7 @@ public class BotService implements IBotService
 			System.out.println("fact: "+fact);
 			
 			if(fact.equals("-?")) {
-				return "-f - вывести список фактов";
+				return "-f - list facts";
 			}
 			else if(fact.equals("-f")) {
 				String answer = "";
@@ -183,8 +205,8 @@ public class BotService implements IBotService
 				return answer;
 			} else {
 				beliefs.add(fact);
-				return "    Окей, " + from + ", я принял!";
+				return "    Ok, " + from + ", I accepted!";
 			}
-		} else return "    " + from + ", Вы не входите в список моих друзей!";
+		} else return "    " + from + ", You are not on my friends list!";
 	}
 }

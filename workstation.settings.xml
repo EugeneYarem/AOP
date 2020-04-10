@@ -153,39 +153,24 @@
 		<p0:property __ID="121" type="autocreate">true</p0:property>
 		<p0:property __ID="122" type="autodelete">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="123" type="clockservice">
-		<p0:property __ID="124" type="type">system</p0:property>
-		<p0:property __ID="125" type="delta">100</p0:property>
-		<p0:property __ID="126" type="dilation">1.0</p0:property>
+	<p0:properties __ID="123" type="awa@workstation_57c">
+		<p0:property __ID="124" type="fast">false</p0:property>
+		<p0:property __ID="125" type="autocreate">true</p0:property>
+		<p0:property __ID="126" type="autodelete">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="127" type="simulationservice">
-		<p0:property __ID="128" type="executing">true</p0:property>
+	<p0:properties __ID="127" type="awa@workstation_87d">
+		<p0:property __ID="128" type="fast">false</p0:property>
+		<p0:property __ID="129" type="autocreate">true</p0:property>
+		<p0:property __ID="130" type="autodelete">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="129" type="awa@workstation_57c">
-		<p0:property __ID="130" type="fast">false</p0:property>
-		<p0:property __ID="131" type="autocreate">true</p0:property>
-		<p0:property __ID="132" type="autodelete">true</p0:property>
+	<p0:properties __ID="131" type="awa@workstation_fde">
+		<p0:property __ID="132" type="fast">false</p0:property>
+		<p0:property __ID="133" type="autocreate">true</p0:property>
+		<p0:property __ID="134" type="autodelete">true</p0:property>
 	</p0:properties>
-	<p0:properties __ID="133" type="securityservice">
-		<p0:property __ID="134" type="validityduration">327680</p0:property>
-		<p0:property __ID="135" type="usepass">true</p0:property>
-		<p0:property __ID="136" type="password">800549a4-aab</p0:property>
-		<p0:property __ID="137" type="selected_mechanism">0</p0:property>
-		<p0:property __ID="138" type="trustedlan">false</p0:property>
-		<p0:property __ID="139" type="storepath">./keystore</p0:property>
-		<p0:property __ID="140" type="storepass">keystore</p0:property>
-		<p0:property __ID="141" type="keypass">keystore</p0:property>
-		<p0:property __ID="142" type="selmech">0</p0:property>
-		<p0:properties __ID="143" type="DecentralizedAcquisitionMechanism">
-			<p0:property __ID="144" type="responses">1</p0:property>
-		</p0:properties>
-		<p0:properties __ID="145" type="TTPAcquisitionMechanism">
-			<p0:property __ID="146" type="verify">true</p0:property>
-		</p0:properties>
-	</p0:properties>
-	<p0:properties __ID="147" type="StarterServicePanel">
-		<p0:properties __ID="148" type="mpanel">
-			<p0:property __ID="149" type="tree"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+	<p0:properties __ID="135" type="StarterServicePanel">
+		<p0:properties __ID="136" type="mpanel">
+			<p0:property __ID="137" type="tree"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <p0:TreeProperties xmlns:p0="typeinfo:jadex.base.gui.filetree" __ID="0">
 	<selectedNode>
 		<p0:NodePath __ID="1" entry="0">
@@ -228,19 +213,49 @@
 	</rootPathEntries>
 </p0:TreeProperties>
 ]]></p0:property>
-			<p0:properties __ID="150" type="mic">
-				<p0:property __ID="151" type="Micro Agent">true</p0:property>
+			<p0:properties __ID="138" type="mic">
+				<p0:property __ID="139" type="Micro Agent">true</p0:property>
 			</p0:properties>
 		</p0:properties>
-		<p0:properties __ID="152" type="spanel">
-			<p0:property __ID="153" type="model">bin\laba1\BotAgent.class</p0:property>
-			<p0:property __ID="154" type="ridurl">file:bin</p0:property>
-			<p0:property __ID="155" type="globalrid"></p0:property>
-			<p0:property __ID="156" type="startsuspended">false</p0:property>
-			<p0:property __ID="157" type="autogenerate">false</p0:property>
-			<p0:property __ID="158" type="number">1</p0:property>
-			<p0:property __ID="159" type="name">Bot</p0:property>
-			<p0:property __ID="160" type="argument">"pass"</p0:property>
+		<p0:properties __ID="140" type="spanel">
+			<p0:property __ID="141" type="model">bin\laba1\BotAgent.class</p0:property>
+			<p0:property __ID="142" type="ridurl">file:bin</p0:property>
+			<p0:property __ID="143" type="globalrid"></p0:property>
+			<p0:property __ID="144" type="startsuspended">false</p0:property>
+			<p0:property __ID="145" type="autogenerate">false</p0:property>
+			<p0:property __ID="146" type="number">1</p0:property>
+			<p0:property __ID="147" type="name">Bot</p0:property>
+			<p0:property __ID="148" type="argument">"pass"</p0:property>
 		</p0:properties>
+	</p0:properties>
+	<p0:properties __ID="149" type="clockservice">
+		<p0:property __ID="150" type="type">system</p0:property>
+		<p0:property __ID="151" type="delta">100</p0:property>
+		<p0:property __ID="152" type="dilation">1.0</p0:property>
+	</p0:properties>
+	<p0:properties __ID="153" type="simulationservice">
+		<p0:property __ID="154" type="executing">true</p0:property>
+	</p0:properties>
+	<p0:properties __ID="155" type="securityservice">
+		<p0:property __ID="156" type="validityduration">327680</p0:property>
+		<p0:property __ID="157" type="usepass">true</p0:property>
+		<p0:property __ID="158" type="password">800549a4-aab</p0:property>
+		<p0:property __ID="159" type="selected_mechanism">0</p0:property>
+		<p0:property __ID="160" type="trustedlan">false</p0:property>
+		<p0:property __ID="161" type="storepath">./keystore</p0:property>
+		<p0:property __ID="162" type="storepass">keystore</p0:property>
+		<p0:property __ID="163" type="keypass">keystore</p0:property>
+		<p0:property __ID="164" type="selmech">0</p0:property>
+		<p0:properties __ID="165" type="DecentralizedAcquisitionMechanism">
+			<p0:property __ID="166" type="responses">1</p0:property>
+		</p0:properties>
+		<p0:properties __ID="167" type="TTPAcquisitionMechanism">
+			<p0:property __ID="168" type="verify">true</p0:property>
+		</p0:properties>
+	</p0:properties>
+	<p0:properties __ID="169" type="awa@workstation_c09">
+		<p0:property __ID="170" type="fast">false</p0:property>
+		<p0:property __ID="171" type="autocreate">true</p0:property>
+		<p0:property __ID="172" type="autodelete">true</p0:property>
 	</p0:properties>
 </p0:properties>
