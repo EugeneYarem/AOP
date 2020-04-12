@@ -193,7 +193,7 @@ public class BotService implements IBotService
 			System.out.println("fact: "+fact);
 			
 			if(fact.equals("-?")) {
-				return "-f - list facts";
+				return "-f - facts list";
 			}
 			else if(fact.equals("-f")) {
 				String answer = "";
