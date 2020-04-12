@@ -14,15 +14,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -32,14 +28,10 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
 import jadex.bridge.IComponentStep;
 import jadex.bridge.IExternalAccess;
 import jadex.bridge.IInternalAccess;
@@ -58,24 +50,14 @@ public class ChatGui extends JFrame
 {
 	//-------- attributes --------
 	
-	/** The textfield with received messages. */
-	protected JLabel chat;
-	
-	protected JTextPane received;
-	
+	protected JLabel chat;	
+	protected JTextPane received;	
 	protected JList<String> chattersList;
-	
-	/** The agent owning the gui. */
-	protected IExternalAccess agent;
-	
-	protected String nickname;
-	
-	protected Map<String, String> messages;
-	
-	protected String currentChat;
-	
-	protected Set<String> activeChats;
-	
+	protected IExternalAccess agent;	
+	protected String nickname;	
+	protected Map<String, String> messages;	
+	protected String currentChat;	
+	protected Set<String> activeChats;	
 	private ArrayList<Message> currentCensoredMessage; // contains censored message and possible bot answer on it
 	
 	//-------- constructors --------
@@ -206,20 +188,7 @@ public class ChatGui extends JFrame
 								fut.addResultListener(new IIntermediateResultListener<IChatService>()
 								{
 									public void resultAvailable(Collection<IChatService> result)
-									{
-										/*for(Iterator<IChatService> it=result.iterator(); it.hasNext(); )
-										{
-											IChatService cs = it.next();
-											try
-											{
-												cs.message(nickname, currentChat, text);
-											}
-											catch(Exception e)
-											{
-												System.out.println("Could not send message to: "+cs);
-											}
-										}*/
-									}
+									{ }
 									
 									public void intermediateResultAvailable(IChatService cs)
 									{
@@ -230,19 +199,16 @@ public class ChatGui extends JFrame
 									}
 									
 									public void finished()
-									{
-									}
+									{ }
 									
 									public void exceptionOccurred(Exception exception)
-									{
-									}
+									{ }
 									
 								});
 								return IFuture.DONE;
 							}
 						});
 		        	} catch(Exception e) {
-		        		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		        		String errorMes = e.getMessage();
 		        		errorMes = errorMes.substring(errorMes.indexOf(':') + 2);
 		        		System.out.println(errorMes);
@@ -256,14 +222,12 @@ public class ChatGui extends JFrame
 								TimeUnit.MINUTES.sleep(1);
 								send.setEnabled(true);
 							} catch (InterruptedException e1) {
-								System.out.println("======================================");
 								e1.printStackTrace();
 							}
 			        		return;
 		        		}
 		        		
 		        		if(errorMes.equals("NOT LATIN!!!")) {
-		        			System.out.println("*******************");
 		        			JOptionPane.showMessageDialog(ChatGui.this,
 		        					"You can use only latin alphabet.",
 		        					"Warning",
@@ -291,7 +255,6 @@ public class ChatGui extends JFrame
 	
 	/**
 	 *  Method to add a new text message.
-	 *  @param text The text.
 	 */
 	public void addMessage(final String from, final String to, final String text)
 	{

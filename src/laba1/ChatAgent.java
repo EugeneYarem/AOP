@@ -1,14 +1,7 @@
 package laba1;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-
-import jadex.bridge.IComponentIdentifier;
-import jadex.bridge.IComponentStep;
 import jadex.bridge.IInternalAccess;
-import jadex.bridge.component.IExecutionFeature;
-import jadex.bridge.service.annotation.Value;
 import jadex.bridge.service.component.IRequiredServicesFeature;
 import jadex.bridge.service.types.clock.IClockService;
 import jadex.commons.future.DefaultResultListener;
@@ -20,7 +13,6 @@ import jadex.commons.future.IntermediateDefaultResultListener;
 import jadex.micro.annotation.Agent;
 import jadex.micro.annotation.AgentArgument;
 import jadex.micro.annotation.AgentBody;
-import jadex.micro.annotation.AgentService;
 import jadex.micro.annotation.Binding;
 import jadex.micro.annotation.Description;
 import jadex.micro.annotation.Implementation;
@@ -30,13 +22,12 @@ import jadex.micro.annotation.RequiredService;
 import jadex.micro.annotation.RequiredServices;
 
 /**
- *  Chat micro agent with a . 
+ *  Chat micro agent. 
  */
 @Description("This agent provides a basic chat service.")
 @Agent
 @ProvidedServices(@ProvidedService(type=IChatService.class, 
-	implementation=@Implementation(value=ChatService.class/*, 
-	interceptors=@Value(clazz=SpamInterceptor.class)*/)))
+	implementation=@Implementation(value=ChatService.class)))
 @RequiredServices({
 	@RequiredService(name="clockservice", type=IClockService.class, 
 		binding=@Binding(scope=Binding.SCOPE_PLATFORM)),
@@ -88,7 +79,6 @@ public class ChatAgent
 							public void intermediateResultAvailable(IChatService cs)
 							{
 								if(!nick.equals(nickname)) {
-									//System.out.println(nickname + " - " + nick + " : " + nick.equals(nickname));
 									cs.addChatter(nick);
 								}										
 							}

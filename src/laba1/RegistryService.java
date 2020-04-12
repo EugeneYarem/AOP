@@ -39,7 +39,6 @@ public class RegistryService implements IRegistryService
 		
 		final SubscriptionIntermediateFuture<String> ret = new SubscriptionIntermediateFuture<String>();
         subscriptions.add(ret);
-        // System.out.println("Subscribers number: " + subscriptions.size());
         
         for(SubscriptionIntermediateFuture<String> subscriber: subscriptions)
         {

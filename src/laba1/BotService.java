@@ -1,47 +1,26 @@
 package laba1;
 
-import java.awt.BorderLayout;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-
-import javax.swing.SwingUtilities;
-
-import jadex.bridge.IExternalAccess;
 import jadex.bridge.IInternalAccess;
 import jadex.bridge.service.annotation.Service;
 import jadex.bridge.service.annotation.ServiceComponent;
-import jadex.bridge.service.annotation.ServiceShutdown;
-import jadex.bridge.service.annotation.ServiceStart;
-import jadex.bridge.service.component.IRequiredServicesFeature;
-import jadex.bridge.service.types.clock.IClockService;
-import jadex.commons.future.Future;
-import jadex.commons.future.IFuture;
-import jadex.commons.gui.future.SwingExceptionDelegationResultListener;
-import laba1.SpamInterceptor.Pair;
 
 import org.python.util.PythonInterpreter;
 import org.python.core.*;
 
 /**
- *  The chat service.
+ *  The bot service.
  */
 @Service
 public class BotService implements IBotService
 {
 	/** The agent. */
 	@ServiceComponent
-	protected IInternalAccess agent;
-	
-	protected String nickname;
-	
-	protected String appeal;
-	
+	protected IInternalAccess agent;	
+	protected String nickname;	
+	protected String appeal;	
 	private final Integer maxNegativeRate = -2;
 	private HashMap<String, Integer> userRates = new HashMap<String, Integer>();
 	private HashSet<String> friends = new HashSet<String>();
@@ -83,10 +62,6 @@ public class BotService implements IBotService
 			return messages;
 		}
 		
-		/*Pair<String,Integer> censoringResult = this.censorText(text);
-		String censoredMessage = censoringResult.getFirst();
-		Integer badWordsNumber = censoringResult.getSecond();	*/	
-		
 		PythonInterpreter pi = new PythonInterpreter();
     	pi.exec("from profanityfilter import ProfanityFilter");
     	pi.exec("pf = ProfanityFilter()");
@@ -98,11 +73,11 @@ public class BotService implements IBotService
         String censoredMessage = ((PyString)pi.get("result")).asString();
         Integer badWordsNumber = ((PyInteger)pi.get("badWordsNum")).asInt();
                 		
-		System.out.println("badWordsNumber: "+badWordsNumber);
-		System.out.println("censoredMessage: "+censoredMessage);
+		System.out.println("badWordsNumber: " + badWordsNumber);
+		System.out.println("censoredMessage: " + censoredMessage);
 		
 		Integer userRate = userRates.get(from);
-		System.out.println(from + " rate: "+userRate);
+		System.out.println(from + " rate: " + userRate);
 		if(userRate != null) {
 			userRate -= badWordsNumber;
 			this.userRates.put(from, userRate);
@@ -117,65 +92,21 @@ public class BotService implements IBotService
 			throw new Exception("FORBIDDEN!!!"); 
 		}
 		
-		nickname = "@Bot"; // + agent.getComponentIdentifier().getLocalName();
-		System.out.println("@@@@nickname: "+nickname);
+		nickname = "@Bot";
 		appeal = nickname + ",";
 		
 		messages.add(new Message(from, to, censoredMessage, false));
 		
-		// this.agent.getComponentIdentifier().getName();
 		Integer spacePos = text.indexOf(" ");
 		if(spacePos > 0 && text.substring(0, spacePos).equals(appeal)) {
 			if(badWordsNumber == 0) {
 				messages.add(new Message(from, to, this.answerOnFact(from, to, censoredMessage), true));
 			} else {
-				//"	" + from + ", Вы не входите в список моих друзей!"
 				messages.add(new Message(from, to, "    " + from + ", not even going to answer your insults!", true));
 			}
 		}
 				
 		return messages;
-		
-		// context.getArgumentArray()[2] = censoredMessage;
-		
-		/*List<Object> arguments = new ArrayList<Object>();		 
-		arguments.add(sender);
-		arguments.add(target);
-		arguments.add(censoredMessage);
-		
-		context.setArguments(arguments);
-		return context.invoke();*/
-	}
-	
-	private Pair<String,Integer> censorText(String message) {
-		Character[] symbols = {'.', ',', '!', '?', ';', ':'};
-		List<Character> symbolsList = Arrays.asList(symbols);
-		
-		String[] censored = {"дура", "дурак", "балбес"};
-        String[] splitstring = message.split(" ");
-        
-        Integer badWordsCounter = 0;
-        
-        for(int k = 0; k < censored.length; k++){
-            for(int i = 0; i < splitstring.length; i++){
-                if(splitstring[i].toLowerCase().contains(censored[k])){
-                	if(symbolsList.contains(splitstring[i].charAt(splitstring[i].length() - 1))) {
-                		splitstring[i] = "[вырезано цензурой]" + splitstring[i].charAt(splitstring[i].length() - 1);
-                	} else splitstring[i] = "[вырезано цензурой]";
-                    badWordsCounter++;
-                }
-            }
-        }
- 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < splitstring.length; i++) {
-        	if(i > 0) {
-        		stringBuilder.append(" ");
-        	}
-            stringBuilder.append(splitstring[i]);
-        }
-        
-        return new Pair<String, Integer>(stringBuilder.toString(), badWordsCounter);
 	}
 	
 	@Override
